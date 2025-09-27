@@ -10,9 +10,10 @@
 
 <body class="grid justify-center">
     @include('partials.header')
-    <main class="border border-gray-200 border-t-0 p-5">
+    <main class="border border-gray-200 border-t-0 p-5 border-b-0">
         @yield('content')
     </main>
+    @include('partials.footer')
 </body>
 
 </html>

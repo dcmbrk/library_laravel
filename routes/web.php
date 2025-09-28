@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Models\Category;
 
+Route::get('books/{slug}', function ($slug) {
+    // Lấy thông tin sách theo slug
+    $book = Book::where('slug', $slug)->with('category')->firstOrFail();
+
+    return view('books.show', compact('book'));
+})->name('books.show');
+
+
 
 
 Route::get('/{slug}', function ($slug) {

@@ -12,6 +12,6 @@
     <x-book.item :book=" $book" class="border p-2 border-gray-100"></x-book.item>
     @endforeach
 </section>
-<div class="mt-6 flex justify-center items-center">
+<div class="mt-6 mb-2 flex justify-center items-center">
     {{ $books->links() }}
 </div>

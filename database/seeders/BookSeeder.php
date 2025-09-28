@@ -30,7 +30,8 @@ class BookSeeder extends Seeder
                 'description' => $book['description'],
                 'url' => $book['url'],
                 'image' => $book['image'],
-                'category_id' => $book['category_id']
+                'category_id' => $book['category_id'],
+                'slug' => $book['slug'],
             ]);
         });
     }

@@ -6,8 +6,10 @@
     <nav class="flex items-center justify-between p-6 text-lg min-w-[1440px] border border-gray-200">
         <div class="flex space-x-10 cursor-pointer items-center">
             <a href="/" class="font-serif font-bold text-xl uppercase">Open Library</a>
-            <a href="/account/books">My books</a>
+            <!-- <a href="/account/books">My books</a> -->
+            <a href="/account/books">Sách của tôi</a>
         </div>
-        <button>Logout</button>
+        <!-- <button>Logout</button> -->
+        <button>Đăng xuất</button>
     </nav>
 </header>

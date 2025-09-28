@@ -26,6 +26,8 @@ return new class extends Migration
             $table->text('url');
             $table->text('image');
             $table->timestamps(0);
+
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
         });
     }
 

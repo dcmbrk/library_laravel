@@ -1,23 +1,17 @@
-<h2 class="text-lg font-bold mb-5 border border-gray-500 inline-block px-4 py-4">{{ $slot }}</h2>
-<section class="grid grid-cols-4 gap-y-6 justify-items-center">
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
-    <x-book.item></x-book.item>
+@props(['books'])
+<!-- <div class="flex items-center justify-center">
+    <section class="grid grid-cols-5 gap-y-6 justify-around">
+        @foreach($books as $book)
+        <x-book.item :book="$book"></x-book.item>
+        @endforeach
+
+</div>
+-->
+<section class="grid grid-cols-4 gap-y-8 max-w-[1150px] mx-auto justify-items-center">
+    @foreach($books as $book)
+    <x-book.item :book=" $book" class="border p-2 border-gray-100"></x-book.item>
+    @endforeach
 </section>
+<div class="mt-6 flex justify-center items-center">
+    {{ $books->links() }}
+</div>

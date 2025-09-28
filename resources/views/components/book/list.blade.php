@@ -1,12 +1,12 @@
+@props(['books'])
+
 <section>
     <div class="border-t-2 border-gray-300 py-3 flex justify-between items-center mb-5">
         <p class="text-xl font-bold">{{ $slot }}</p>
-        <a class="underline">Xem thêm</a>
+        <a class="underline" href="{{ route('categories.show', $books->first()->category->slug) }}">Xem thêm</a>
     </div>
     <div class=" flex justify-between mb-10">
-        <x-book.item></x-book.item>
-        <x-book.item></x-book.item>
-        <x-book.item></x-book.item>
-        <x-book.item></x-book.item>
-        <x-book.item></x-book.item>
+        @foreach($books as $book)
+        <x-book.item :book="$book"></x-book.item>
+        @endforeach
 </section>

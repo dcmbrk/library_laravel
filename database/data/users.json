@@ -1,0 +1,32 @@
+[
+    {
+        "name": "testuser",
+        "email": "testuser@gmail.com",
+        "password": "password",
+        "role": "reader"
+    },
+    {
+        "name": "adminuser",
+        "email": "admin@gmail.com",
+        "password": "admin123",
+        "role": "admin"
+    },
+    {
+        "name": "librarian01",
+        "email": "librarian01@gmail.com",
+        "password": "libpass",
+        "role": "librarian"
+    },
+    {
+        "name": "reader02",
+        "email": "reader02@gmail.com",
+        "password": "readerpass",
+        "role": "reader"
+    },
+    {
+        "name": "editor01",
+        "email": "editor01@gmail.com",
+        "password": "editpass",
+        "role": "editor"
+    }
+]

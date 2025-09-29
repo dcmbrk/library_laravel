@@ -1,7 +1,7 @@
 @props(['book', 'class' => ''])
 
 <a href="{{ route('books.show', $book->slug) }}" {{ $attributes->merge(['class' => "group min-h-[230px] w-[245px] flex
-    flex-col items-center text-center
+    flex-col items-center text-center text-sm
     leading-tight cursor-pointer $class"]) }}>
     <img src="{{ $book->image }}" alt=""
         class="h-[199px] w-[199px] object-contain transition-transform duration-300 ease-in-out group-hover:scale-110">

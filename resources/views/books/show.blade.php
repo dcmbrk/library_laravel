@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<p>{{$status}}</p>
 <div class="p-5 inline-flex space-x-5">
     <div class="border border-gray-100">
         <img src="{{ $book->image }}" alt="" class="h-[360px] w-[360px] object-contain">
@@ -10,12 +11,31 @@
                 $book->author }}</a>
         </p>
         <p class=" border-t border-gray-300 py-4">Còn lại {{ $book->available_copies }} bản</p>
-        <button type="submit"
-            class="px-6 py-3 border border-gray-500 hover:text-white hover:bg-black transition-colors duration-300 ease-in-out">Mượn</button>
+        @if($status === 'wait')
+        <form action="{{ route('books.borrow.cancel', $book->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                class="group w-[120px] px-6 py-3 border border-gray-100 bg-black text-white transition-colors duration-300 ease-in-out relative overflow-hidden hover:bg-red-600">
+                <span class="block group-hover:hidden text-center">Chờ duyệt</span>
+                <span class="hidden group-hover:block text-center text-white">Hủy</span>
+            </button>
+        </form>
+        @elseif($status === 'reading')
+        <button type="button" class="px-6 py-3 border border-gray-500 text-white bg-black cursor-not-allowed">Đang
+            đọc</button>
+        @else
+        <form action="{{ route('books.borrow', $book->id) }}" method="POST">
+            @csrf
+            <button type="submit"
+                class="px-6 py-3 border border-gray-500 text-white bg-black hover:text-black hover:bg-white transition-colors duration-300 ease-in-out">Mượn</button>
+        </form>
+        @endif
+
     </div>
 </div>
 
-<div class="my-20 flex justify-between items-center">
+<div class="my-20 flex justify-between">
     <div>
         <h4 class="text-xl font-bold mb-2">Giới thiệu sách</h4>
         <div class="w-[900px] space-y-2">
@@ -24,7 +44,7 @@
     </div>
     <div>
         <h4 class="text-xl font-bold mb-2">Thông tin chi tiết</h4>
-        <ul class="border border-gray-400 px-6 py-5 space-y-2">
+        <ul class="border border-gray-300 px-6 py-5 space-y-2">
             <li class="flex before:content-['•'] before:mr-2">
                 <span class="w-[150px] font-semibold">Tác giả:</span>
                 <span class="uppercase w-[150px] break-words">{{ $book->author }}</span>

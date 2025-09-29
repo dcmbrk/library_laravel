@@ -1,0 +1,114 @@
+[
+    {
+        "book_id": 101,
+        "user_id": 4,
+        "borrow_date": "2025-07-01 10:00:00",
+        "due_date": "2025-07-15 10:00:00",
+        "return_date": "2025-07-09 10:00:00",
+        "status": "already_read"
+    },
+    {
+        "book_id": 102,
+        "user_id": 1,
+        "borrow_date": "2025-07-02 10:00:00",
+        "due_date": "2025-07-16 10:00:00",
+        "return_date": null,
+        "status": "reading"
+    },
+    {
+        "book_id": 103,
+        "user_id": 4,
+        "borrow_date": "2025-07-03 10:00:00",
+        "due_date": "2025-07-17 10:00:00",
+        "return_date": "2025-07-14 10:00:00",
+        "status": "wait"
+    },
+    {
+        "book_id": 104,
+        "user_id": 2,
+        "borrow_date": "2025-07-04 10:00:00",
+        "due_date": "2025-07-18 10:00:00",
+        "return_date": "2025-07-12 10:00:00",
+        "status": "overdue"
+    },
+    {
+        "book_id": 105,
+        "user_id": 3,
+        "borrow_date": "2025-07-05 10:00:00",
+        "due_date": "2025-07-19 10:00:00",
+        "return_date": "2025-07-18 10:00:00",
+        "status": "overdue"
+    },
+    {
+        "book_id": 106,
+        "user_id": 3,
+        "borrow_date": "2025-07-06 10:00:00",
+        "due_date": "2025-07-20 10:00:00",
+        "return_date": "2025-07-14 10:00:00",
+        "status": "overdue"
+    },
+    {
+        "book_id": 107,
+        "user_id": 4,
+        "borrow_date": "2025-07-07 10:00:00",
+        "due_date": "2025-07-21 10:00:00",
+        "return_date": "2025-07-16 10:00:00",
+        "status": "reading"
+    },
+    {
+        "book_id": 108,
+        "user_id": 1,
+        "borrow_date": "2025-07-08 10:00:00",
+        "due_date": "2025-07-22 10:00:00",
+        "return_date": null,
+        "status": "overdue"
+    },
+    {
+        "book_id": 109,
+        "user_id": 4,
+        "borrow_date": "2025-07-09 10:00:00",
+        "due_date": "2025-07-23 10:00:00",
+        "return_date": "2025-07-16 10:00:00",
+        "status": "wait"
+    },
+    {
+        "book_id": 110,
+        "user_id": 4,
+        "borrow_date": "2025-07-10 10:00:00",
+        "due_date": "2025-07-24 10:00:00",
+        "return_date": "2025-07-23 10:00:00",
+        "status": "wait"
+    },
+    {
+        "book_id": 111,
+        "user_id": 2,
+        "borrow_date": "2025-07-11 10:00:00",
+        "due_date": "2025-07-25 10:00:00",
+        "return_date": "2025-07-19 10:00:00",
+        "status": "reading"
+    },
+    {
+        "book_id": 112,
+        "user_id": 3,
+        "borrow_date": "2025-07-12 10:00:00",
+        "due_date": "2025-07-26 10:00:00",
+        "return_date": null,
+        "status": "overdue"
+    },
+    {
+        "book_id": 113,
+        "user_id": 1,
+        "borrow_date": "2025-07-13 10:00:00",
+        "due_date": "2025-07-27 10:00:00",
+        "return_date": "2025-07-26 10:00:00",
+        "status": "reading"
+    },
+    {
+        "book_id": 114,
+        "user_id": 4,
+        "borrow_date": "2025-07-14 10:00:00",
+        "due_date": "2025-07-28 10:00:00",
+        "return_date": "2025-07-20 10:00:00",
+        "status": "already_read"
+    }
+]

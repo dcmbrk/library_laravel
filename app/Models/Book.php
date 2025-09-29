@@ -14,8 +14,9 @@ class Book extends Model
         'title', 'author', 'translator', 'publisher', 'publish_date', 'pages', 'size', 'total_copies', 'available_copies', 'description', 'url', 'image', 'category_id'
     ];
 
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function users() {
+        return $this->belongsToMany(User::class, 'book_user')
+                ->withPivot(['status', 'borrow_date', 'due_date', 'return_date']);
     }
 
     public function category(){

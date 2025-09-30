@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+public function run(): void
     {
         $json = File::get('database/data/categories.json');
         $categories = collect(json_decode($json, true));

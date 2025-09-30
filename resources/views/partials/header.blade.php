@@ -33,42 +33,42 @@
 
                         <!-- Cột 1 -->
                         <div>
-                            <h4 class="font-bold mb-2"> <a href="{{ route('categories.show', 'hu-cau') }}"
+                            <h4 class="font-bold mb-2"> <a href="{{ route('category.show', 'hu-cau') }}"
                                     class="hover:underline">Hư
                                     cấu</a></h4>
                             <ul class="space-y-1 text-sm">
-                                <li><a href="{{ route('categories.show', 'van-hoc-hien-dai') }}"
+                                <li><a href="{{ route('category.show', 'van-hoc-hien-dai') }}"
                                         class="hover:underline">Văn học hiện đại</a></li>
-                                <li><a href="{{ route('categories.show', 'van-hoc-kinh-dien') }}"
+                                <li><a href="{{ route('category.show', 'van-hoc-kinh-dien') }}"
                                         class="hover:underline">Văn học kinh điển</a></li>
-                                <li><a href="{{ route('categories.show', 'van-hoc-thieu-nhi') }}"
+                                <li><a href="{{ route('category.show', 'van-hoc-thieu-nhi') }}"
                                         class="hover:underline">Văn học thiếu nhi</a></li>
-                                <li><a href="{{ route('categories.show', 'lang-man') }}" class="hover:underline">Lãng
+                                <li><a href="{{ route('category.show', 'lang-man') }}" class="hover:underline">Lãng
                                         mạn</a></li>
-                                <li><a href="{{ route('categories.show', 'ky-ao') }}" class="hover:underline">Kỳ ảo</a>
+                                <li><a href="{{ route('category.show', 'ky-ao') }}" class="hover:underline">Kỳ ảo</a>
                                 </li>
-                                <li><a href="{{ route('categories.show', 'khoa-hoc-vien-tuong') }}"
+                                <li><a href="{{ route('category.show', 'khoa-hoc-vien-tuong') }}"
                                         class="hover:underline">Khoa học Viễn tưởng</a></li>
-                                <li><a href="{{ route('categories.show', 'tan-van') }}" class="hover:underline">Tản
+                                <li><a href="{{ route('category.show', 'tan-van') }}" class="hover:underline">Tản
                                         văn</a></li>
                             </ul>
                         </div>
 
                         <!-- Cột 2 -->
                         <div>
-                            <h4 class="font-bold mb-2"> <a href="{{ route('categories.show', 'phi-hu-cau') }}"
+                            <h4 class="font-bold mb-2"> <a href="{{ route('category.show', 'phi-hu-cau') }}"
                                     class="hover:underline">Phi
                                     hư cấu</a></h4>
                             <ul class="space-y-1 text-sm">
-                                <li><a href="{{ route('categories.show', 'triet-hoc') }}" class="hover:underline">Triết
+                                <li><a href="{{ route('category.show', 'triet-hoc') }}" class="hover:underline">Triết
                                         học</a></li>
-                                <li><a href="{{ route('categories.show', 'khoa-hoc') }}" class="hover:underline">Khoa
+                                <li><a href="{{ route('category.show', 'khoa-hoc') }}" class="hover:underline">Khoa
                                         học</a></li>
-                                <li><a href="{{ route('categories.show', 'kinh-doanh') }}" class="hover:underline">Kinh
+                                <li><a href="{{ route('category.show', 'kinh-doanh') }}" class="hover:underline">Kinh
                                         doanh</a></li>
-                                <li><a href="{{ route('categories.show', 'ky-nang') }}" class="hover:underline">Kỹ
+                                <li><a href="{{ route('category.show', 'ky-nang') }}" class="hover:underline">Kỹ
                                         năng</a></li>
-                                <li><a href="{{ route('categories.show', 'nghe-thuat') }}" class="hover:underline">Nghệ
+                                <li><a href="{{ route('category.show', 'nghe-thuat') }}" class="hover:underline">Nghệ
                                         thuật</a></li>
                             </ul>
                         </div>
@@ -77,27 +77,27 @@
                         <!-- <div>
                             <h4 class="font-bold mb-2">Thiếu nhi</h4>
                             <ul class="space-y-1 text-sm">
-                                <li><a href="{{ route('categories.show', 'triet-hoc') }}" class="hover:underline">0-5
+                                <li><a href="{{ route('category.show', 'triet-hoc') }}" class="hover:underline">0-5
                                         tuổi</a></li>
-                                <li><a href="{{ route('categories.show', 'triet-hoc') }}" class="hover:underline">6-8
+                                <li><a href="{{ route('category.show', 'triet-hoc') }}" class="hover:underline">6-8
                                         tuổi</a></li>
-                                <li><a href="{{ route('categories.show', 'triet-hoc') }}" class="hover:underline">9-12
+                                <li><a href="{{ route('category.show', 'triet-hoc') }}" class="hover:underline">9-12
                                         tuổi</a></li>
-                                <li><a href="{{ route('categories.show', 'triet-hoc') }}" class="hover:underline">13-15
+                                <li><a href="{{ route('category.show', 'triet-hoc') }}" class="hover:underline">13-15
                                         tuổi</a></li>
                             </ul>
                         </div> -->
 
                         <!-- Cột 4 -->
                         <div>
-                            <h4 class="font-bold mb-2"> <a href="{{ route('categories.show', 'phan-loai-khac') }}"
+                            <h4 class="font-bold mb-2"> <a href="{{ route('category.show', 'phan-loai-khac') }}"
                                     class="hover:underline">Phân
                                     loại
                                     khác</a></h4>
                             <ul class="space-y-1 text-sm">
-                                <li><a href="{{ route('categories.show', 'sach-ban-chay') }}"
-                                        class="hover:underline">Sách bán chạy</a></li>
-                                <li><a href="{{ route('categories.show', 'tac-gia-viet-nam') }}"
+                                <li><a href="{{ route('category.show', 'sach-ban-chay') }}" class="hover:underline">Sách
+                                        bán chạy</a></li>
+                                <li><a href="{{ route('category.show', 'tac-gia-viet-nam') }}"
                                         class="hover:underline">Tác giả Việt Nam</a></li>
                             </ul>
                         </div>
@@ -110,8 +110,14 @@
             <a href="/" class="font-serif font-bold text-xl tracking-widest">nhã nam</a>
         </div>
         <!-- <button>Logout</button> -->
-        <button
-            class="py-2 px-3 text-xs bg-black text-white hover:text-black hover:border hover:border-black hover:bg-white">Đăng
-            nhập</button>
+        <div>
+            <a
+                class="w-[90px] py-2 px-3 text-xs bg-black text-white hover:text-black hover:border hover:border-black hover:bg-white">Đăng
+                nhập</a>
+
+            <a href="/register"
+                class="w-[90px] py-2 px-3 text-xs bg-black text-white hover:text-black hover:border hover:border-black hover:bg-white">Đăng
+                kí</a>
+        </div>
     </nav>
 </header>

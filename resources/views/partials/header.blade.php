@@ -109,15 +109,41 @@
         <div class="absolute left-1/2 -translate-x-1/2">
             <a href="/" class="font-serif font-bold text-xl tracking-widest">nhã nam</a>
         </div>
-        <!-- <button>Logout</button> -->
-        <div>
-            <a
-                class="w-[90px] py-2 px-3 text-xs bg-black text-white hover:text-black hover:border hover:border-black hover:bg-white">Đăng
-                nhập</a>
+        <div class="relative group">
+            <!-- Nút icon user -->
+            <button class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                    class="w-5 h-5 fill-black group-hover:fill-gray-700 transition">
+                    <path
+                        d="M320 312C386.3 312 440 258.3 440 192C440 125.7 386.3 72 320 72C253.7 72 200 125.7 200 192C200 258.3 253.7 312 320 312zM290.3 368C191.8 368 112 447.8 112 546.3C112 562.7 125.3 576 141.7 576L498.3 576C514.7 576 528 562.7 528 546.3C528 447.8 448.2 368 349.7 368L290.3 368z" />
+                </svg>
+            </button>
 
-            <a href="/register"
-                class="w-[90px] py-2 px-3 text-xs bg-black text-white hover:text-black hover:border hover:border-black hover:bg-white">Đăng
-                kí</a>
+            <!-- Dropdown đăng nhập / đăng ký -->
+            <div
+                class="absolute right-0 top-full w-36 bg-white border shadow-lg
+               opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50 border-t-0">
+                <ul class="flex flex-col text-sm">
+                    @guest
+                    <li>
+                        <a href="{{ route('login') }}" class="block px-4 py-1 hover:underline">Đăng nhập</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register.create') }}" class="block px-4 py-1 hover:underline">Đăng ký</a>
+                    </li>
+                    @endguest
+                    @auth
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-4 py-3 hover:underline">
+                                Đăng xuất
+                            </button>
+                        </form>
+                    </li>
+                    @endauth
+                </ul>
+            </div>
         </div>
     </nav>
 </header>

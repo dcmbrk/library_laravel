@@ -6,18 +6,22 @@
             <h2 class="text-center text-lg">Đăng kí tài khoản</h2>
             <form action="/register" method="POST" class="space-y-6">
                 @csrf
+                <x-form.label for="name">Tên hiển thị</x-form.label>
                 <div>
-                    <label for="name" class="block mb-1">Tên hiển thị</label>
-                    <input type="text" name="name" id="name" class="border border-gray-300 px-2 py-2 outline-none">
+                    <x-form.input type="text" name="name" id="name"></x-form.input>
+                    <x-form.error name="name"></x-form.error>
                 </div>
+
+                <x-form.label for="email">Email</x-form.label>
                 <div>
-                    <label for="email" class="block mb-1">Email</label>
-                    <input type="email" name="email" id="email" class="border border-gray-300 px-2 py-2 outline-none">
+                    <x-form.input type="email" name="email" id="email"></x-form.input>
+                    <x-form.error name="email"></x-form.error>
                 </div>
+
+                <x-form.label for="password">Mật khẩu</x-form.label>
                 <div>
-                    <label for="password" class="block mb-1">Mật khẩu</label>
-                    <input type="password" name="password" id="password"
-                        class="border border-gray-300 px-2 py-2 mb-3 outline-none">
+                    <x-form.input type="password" name="password" id="password"></x-form.input>
+                    <x-form.error name="password"></x-form.error>
                 </div>
 
                 <div class="flex justify-center">

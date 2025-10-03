@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
-    public function showLoginForm()
+    public function index()
     {
-        return view('dashboard.login');
+        return view('auth.admin.login');
     }
 
     public function login(Request $request)
@@ -25,7 +25,7 @@ class AdminAuthController extends Controller
 
             // Kiểm tra role
             if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('dashboard.index');
             } else {
                 Auth::logout(); // Không phải admin thì out ra luôn
                 return back()->withErrors([
@@ -44,6 +44,8 @@ class AdminAuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('admin.login');
+
+        // Quan trọng: KHÔNG redirect về route logout (tránh vòng lặp)
+        return redirect()->route('admin.login.index'); // hoặc route('login') / '/'
     }
 }

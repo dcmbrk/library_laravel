@@ -1,5 +1,8 @@
 <header>
-    <div class="h-[40px] bg-gradient-to-r from-black/95 via-black/90 to-black/85 flex items-center justify-center">
+    <!-- <div class="h-[40px] bg-gradient-to-r from-brand/95 via-brand/90 to-brand/85 flex items-center justify-center">
+    </div> -->
+
+    <div class="h-[40px] flex items-center justify-center">
         <img src="https://fastly.picsum.photos/id/310/1440/40.jpg?hmac=CCBv16cxZ7-X0pXw00Ah62sLF3Gq19DYy2qUSUkcuRg"
             alt="">
     </div>
@@ -121,7 +124,7 @@
 
             <!-- Dropdown đăng nhập / đăng ký -->
             <div
-                class="absolute right-0 top-full w-36 bg-white border shadow-lg
+                class="absolute right-0 top-full w-36 bg-white border shadow-lg border-gray-200
                opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50 border-t-0">
                 <ul class="flex flex-col text-sm">
                     @guest

@@ -12,6 +12,7 @@ use App\Http\Controllers\BookDashboard;
 use App\Http\Controllers\CategoryDashboard;
 use App\Http\Controllers\UserDashboard;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\ApprovalController;
 use App\Models\Book;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -28,6 +29,28 @@ Route::delete('/dashboard/categories/{id}/destroy', [CategoryDashboard::class, '
 Route::get('/dashboard/categories/{id}/edit', [CategoryDashboard::class, 'edit'])->name('categories.edit');
 Route::put('/dashboard/categories/{id}', [CategoryDashboard::class, 'update'])->name('categories.update');
 //END CATEGORY ROUTE//
+
+
+//APPROVAL DASHBOARD ROUTE //
+
+Route::get('/dashboard/{status}', [ApprovalController::class, 'show'])
+    ->where('status', 'wait|reading|returned|rejected')
+    ->name('dashboard.status');
+
+Route::get('/dashboard/overdue', [ApprovalController::class, 'overdue'])
+    ->name('dashboard.overdue');
+
+Route::post('/dashboard/approval/{book}/borrow', [ApprovalController::class, 'approval'])
+    ->name('books.borrow.approval');
+
+Route::delete('/dashboard/approval/{book}/borrow', [ApprovalController::class, 'cancel'])
+    ->name('books.borrow.cancel');
+
+Route::put('/dashboard/approval/{book}/return', [ApprovalController::class, 'returnBook'])
+    ->name('books.borrow.return');
+
+
+// END APPROVAL DASHBOARD ROUTE //
 
 // USERS DASHBOARD ROUTE //
 Route::get('/dashboard/users', [UserDashboard::class, 'index']);

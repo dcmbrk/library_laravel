@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('book_user', function (Blueprint $table) {
             $table->id();
+
+            // Quan hệ
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('borrow_date');
-            $table->timestamp('due_date');
-            $table->timestamp('return_date')->nullable();
-            $table->string('status');
+
+            // Quản lý thời gian mượn/trả
+            $table->timestamp('borrow_date')->nullable();   // ngày mượn
+            $table->timestamp('due_date')->nullable();      // hạn trả
+            $table->timestamp('return_date')->nullable();   // ngày trả thực tế
+
+            // Trạng thái: wait, reading, returned, rejected
+            $table->string('status')->default('wait');
+
+            // Thời gian tạo/cập nhật bản ghi
+            $table->timestamps();
         });
     }
 

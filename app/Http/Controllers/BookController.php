@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function show($slug){
+public function show($slug){
         $user = User::findOrFail(id: 2);
 
         $book = Book::where('slug', $slug)
@@ -38,6 +38,22 @@ class BookController extends Controller
         // Gắn bản ghi vào pivot table book_user
         $user->books()->attach($book->id, [
             'status'      => 'wait',
+            'borrow_date' => now(),
+            'due_date'    => now()->addDays(14),
+        ]);
+
+        return redirect()->route('account.index');
+    }
+
+    public function approval(Request $request, Book $book){
+        $user = User::findOrFail(id: 2);
+        // // Kiểm tra nếu user đã mượn rồi thì không cho mượn lại
+        if ($user->books()->where('book_id', $book->id)->exists()) {
+            return back()->with('error', 'Bạn đã mượn sách này rồi.');
+        }
+        // Gắn bản ghi vào pivot table book_user
+        $user->books()->attach($book->id, [
+            'status'      => 'reading',
             'borrow_date' => now(),
             'due_date'    => now()->addDays(14),
         ]);

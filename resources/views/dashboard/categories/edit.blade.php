@@ -16,12 +16,12 @@
     @endif
 
     {{-- Form create --}}
-    <form action="{{ route('categories.store') }}" method="POST" class="space-y-4">
+    <form action="{{ route('categories.update', $category->id) }}" method="POST" class="space-y-4">
         @csrf
-
+        @method('PUT')
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700">Tên danh mục</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}"
+            <input type="text" name="name" id="name" value="{{ $category->name }}"
                 class="outline-none p-2 border mt-1 block w-full rounded-md border-gray-300 shadow-sm  focus:border-gray-500">
         </div>
 

@@ -14,16 +14,16 @@
             Schema::create('books', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
-                $table->string('author');
-                $table->string('translator');
-                $table->string('publisher');
-                $table->string('publish_date');
-                $table->integer('pages');
-                $table->string('size');
+                $table->string('author')->default('ĐANG CẬP NHẬT');
+                $table->string('translator')->default('ĐANG CẬP NHẬT');
+                $table->string('publisher')->default('ĐANG CẬP NHẬT');
+                $table->string('publish_date')->default('ĐANG CẬP NHẬT');
+                $table->integer('pages')->default(0);
+                $table->string('size')->default(value: 'ĐANG CẬP NHẬT');
                 $table->integer('total_copies');
                 $table->integer('available_copies');
-                $table->text('description');
-                $table->text('url');
+                $table->text('description')->nullable();
+                $table->text('url')->nullable();
                 $table->text('image');
                 $table->string('slug');
                 $table->timestamps(0);

@@ -4,7 +4,8 @@
     <!-- Header -->
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold">Quản lý sách</h2>
-        <a href="#" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg">
+        <a href="{{ route('dashboard.books.create') }}"
+            class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg">
             Tạo sách mới
         </a>
     </div>
@@ -50,9 +51,15 @@
                         <span class="px-2 py-1 text-xs bg-green-100 text-green-600 rounded">{{
                             $book->category->name}}</span>
                     </td>
-                    <td class="px-6 py-4 max-w-[200px] truncate sticky right-0 bg-white">
-                        <a href="#" class="text-blue-600 hover:underline mr-2">Sửa</a>
-                        <a href="#" class="text-red-600 hover:underline">Xóa</a>
+                    <td class="px-6 py-4 max-w-[200px] truncate sticky right-0 bg-white space-y-2">
+                        <a href="{{ route('dashboard.books.edit', $book->id) }}"
+                            class="text-blue-600 hover:underline mr-2">Sửa</a>
+
+                        <form action="{{ route('dashboard.books.destroy', $book->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:underline">Xóa</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

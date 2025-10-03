@@ -26,7 +26,9 @@
                 </th>
                 <td class="px-6 py-4 text-black">{{ $category->created_at }}</td>
                 <td class="py-4 text-black flex space-x-8 ml-6">
-                    <div><a href="" class="text-blue-600">Sửa</a></div>
+                    <a href="{{ route('categories.edit', $category->id) }}" class="text-blue-600 hover:underline">
+                        Sửa
+                    </a>
                     <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                         @csrf
                         @method('DELETE')

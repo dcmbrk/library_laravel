@@ -54,8 +54,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('dashboard/books/add') }}"
-                            class="{{ request()->is('dashboard/books/add') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} px-4 flex items-center p-[12px] rounded-lg space-x-2">
+                        <a href="{{ url('dashboard/books/create') }}"
+                            class="{{ request()->is('dashboard/books/create') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} px-4 flex items-center p-[12px] rounded-lg space-x-2">
                             Thêm sách
                         </a>
                     </li>

@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SessionController;
 use App\Models\Book;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 
 //CATEGORY ROUTE//
@@ -32,10 +33,31 @@ Route::post('/dashboard/categories/store', function(){
     return redirect()->route('categories.index');
 })->name('categories.store');
 
-Route::delete('/dashboard/categories/destroy/{id}', function ($id) {
+Route::delete('/dashboard/categories/{id}/destroy', function ($id) {
     Category::destroy($id);
     return redirect()->route('categories.index');
 })->name('categories.destroy');
+
+Route::get('/dashboard/categories/{id}/edit', function ($id) {
+    $category = Category::find($id);
+    return view('dashboard.categories.edit', compact('category'));
+})->name('categories.edit');
+
+Route::put('/dashboard/categories/{id}', function(Request $request, $id){
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $category = Category::findOrFail($id);
+    $category->update([
+        'name' => $request->name,
+        'slug' => Str::slug($request->name, '-'),
+    ]);
+
+    return redirect()->route('categories.index')
+                     ->with('success', 'Cập nhật danh mục thành công!');
+})->name('categories.update');
+
 //END CATEGORY ROUTE//
 
 
@@ -50,11 +72,112 @@ Route::get('/dashboard/users', function(){
 });
 
 
+// BOOKS DASHBOARD ROUTE //
 Route::get('/dashboard/books', function(){
     $books = Book::paginate(10);
     return view('dashboard.books.index', compact('books'));
-});
+})->name('dashboard.books.index');
 
+Route::get('/dashboard/books/create', function(){
+    $categories = Category::all();
+    return view('dashboard.books.create', compact('categories'));
+})->name('dashboard.books.create');
+
+Route::delete('/dashboard/books/{id}/destroy', function ($id) {
+    Book::destroy($id);
+    return redirect()->route('dashboard.books.index');
+})->name('dashboard.books.destroy');
+
+Route::post('/dashboard/books/store', function (Request $request) {
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'slug' => 'required|string|unique:books,slug',
+        'author' => 'nullable|string|max:255',
+        'translator' => 'nullable|string|max:255',
+        'publisher' => 'nullable|string|max:255',
+        'publish_date' => 'nullable|string|max:255',
+        'pages' => 'nullable|integer|min:0',
+        'size' => 'nullable|string|max:255',
+        'total_copies' => 'required|integer|min:0',
+        'available_copies' => 'nullable|integer|min:0',
+        'description' => 'nullable|string',
+        'url' => 'nullable|url',
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+    ]);
+
+    // ép giá trị mặc định khi null
+    $validated['author'] = $validated['author'] ?? 'ĐANG CẬP NHẬT';
+    $validated['translator'] = $validated['translator'] ?? 'ĐANG CẬP NHẬT';
+    $validated['publisher'] = $validated['publisher'] ?? 'ĐANG CẬP NHẬT';
+    $validated['publish_date'] = $validated['publish_date'] ?? 'ĐANG CẬP NHẬT';
+    $validated['pages'] = $validated['pages'] ?? 0;
+    $validated['size'] = $validated['size'] ?? 'ĐANG CẬP NHẬT';
+    $validated['available_copies'] = $validated['available_copies'] ?? $validated['total_copies'];
+
+    // xử lý upload ảnh
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('books', 'public');
+        $validated['image'] = Storage::url($path);
+    }
+
+    Book::create($validated);
+
+    return redirect()->route('dashboard.books.index')
+        ->with('success', 'Thêm sách thành công!');
+})->name('dashboard.books.store');
+
+// EDIT
+Route::get('/dashboard/books/{id}/edit', function($id) {
+    $book = Book::findOrFail($id);
+    $categories = Category::all();
+    return view('dashboard.books.edit', compact('book', 'categories'));
+})->name('dashboard.books.edit');
+
+// UPDATE
+Route::put('/dashboard/books/{id}', function(Request $request, $id) {
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'slug' => 'required|string|unique:books,slug,' . $id, // cho phép giữ slug cũ
+        'author' => 'nullable|string|max:255',
+        'translator' => 'nullable|string|max:255',
+        'publisher' => 'nullable|string|max:255',
+        'publish_date' => 'nullable|string|max:255',
+        'pages' => 'nullable|integer|min:0',
+        'size' => 'nullable|string|max:255',
+        'total_copies' => 'required|integer|min:0',
+        'available_copies' => 'nullable|integer|min:0',
+        'description' => 'nullable|string',
+        'url' => 'nullable|url',
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+    ]);
+
+    // ép giá trị mặc định
+    $validated['author'] = $validated['author'] ?? 'ĐANG CẬP NHẬT';
+    $validated['translator'] = $validated['translator'] ?? 'ĐANG CẬP NHẬT';
+    $validated['publisher'] = $validated['publisher'] ?? 'ĐANG CẬP NHẬT';
+    $validated['publish_date'] = $validated['publish_date'] ?? 'ĐANG CẬP NHẬT';
+    $validated['pages'] = $validated['pages'] ?? 0;
+    $validated['size'] = $validated['size'] ?? 'ĐANG CẬP NHẬT';
+    $validated['available_copies'] = $validated['available_copies'] ?? $validated['total_copies'];
+
+    // xử lý upload ảnh
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('books', 'public');
+        $validated['image'] = Storage::url($path);
+    }
+
+    $book = Book::findOrFail($id);
+    $book->update($validated);
+
+    return redirect()->route('dashboard.books.index')
+                     ->with('success', 'Cập nhật sách thành công!');
+})->name('dashboard.books.update');
+
+
+
+// END BOOKS DASHBOARD ROUTE //
 
 
 // AUTH ROUTER //
@@ -64,7 +187,6 @@ Route::post('/register', [RegisteredUserController::class, 'store'])->name('regi
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store'])->name('login.store');
 Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
-
 // END AUTH ROUTER //
 
 

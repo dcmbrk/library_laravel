@@ -5,7 +5,7 @@
         <div class="border border-gray-500 px-20 py-10 my-20">
             <h2 class="text-center text-lg">Đăng nhập tài khoản</h2>
 
-            <form action="{{ route('login.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('login.store') }}" method="POST" class="space-y-6" novalidate>
                 @csrf
 
                 <x-form.label for="email">Email</x-form.label>

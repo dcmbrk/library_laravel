@@ -1,5 +1,4 @@
 @props(['book', 'status'])
-
 <div class="p-5 inline-flex space-x-5">
     <div class="border border-gray-100">
         <img src="{{ $book->image }}" alt="" class="h-[360px] w-[360px] object-contain">
@@ -11,7 +10,7 @@
         </p>
         <p class=" border-t border-gray-300 py-4">Còn lại {{ $book->available_copies }} bản</p>
         @if($status === 'wait')
-        <form action="{{ route('books.borrow.cancel', $book->id) }}" method="POST">
+        <form action="{{ route('books.cancel', $book->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit"

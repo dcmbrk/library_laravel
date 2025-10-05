@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AdminAuthController extends Controller
 {
@@ -14,38 +15,36 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
+        $attributes = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ], [
+            'email.required' => 'Vui lòng nhập email.',
+            'email.email' => 'Email không đúng định dạng.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
         ]);
 
-        // Thử đăng nhập
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            // Kiểm tra role
-            if (Auth::user()->role === 'admin') {
-                return redirect()->route('dashboard.index');
-            } else {
-                Auth::logout(); // Không phải admin thì out ra luôn
-                return back()->withErrors([
-                    'email' => 'Bạn không có quyền truy cập admin.',
-                ]);
-            }
+        if (!Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
+                'email' => 'Email hoặc mật khẩu không chính xác.',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'Email hoặc mật khẩu không đúng.',
-        ]);
+        if (! Auth::user()->role === 'admin') {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'Bạn không có quyền truy cập admin.',
+            ]);
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->route('dashboard.index');
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        // Quan trọng: KHÔNG redirect về route logout (tránh vòng lặp)
-        return redirect()->route('admin.login.index'); // hoặc route('login') / '/'
+        return redirect()->route('admin.login.index');
     }
 }

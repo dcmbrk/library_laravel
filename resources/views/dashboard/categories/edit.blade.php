@@ -16,7 +16,7 @@
     @endif
 
     {{-- Form create --}}
-    <form action="{{ route('categories.update', $category->id) }}" method="POST" class="space-y-4">
+    <form action="{{ route('dashboard.categories.update', $category->id) }}" method="POST" class="space-y-4">
         @csrf
         @method('PUT')
         <div>
@@ -26,7 +26,8 @@
         </div>
 
         <div class="flex justify-end space-x-2">
-            <a href="{{ route('categories.index') }}" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Quay
+            <a href="{{ route('dashboard.categories.index') }}"
+                class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Quay
                 lại</a>
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Lưu</button>
         </div>

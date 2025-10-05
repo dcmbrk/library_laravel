@@ -3,13 +3,6 @@
 @section('content')
 <div class="bg-white shadow p-4">
     <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold">
-            @if($status === 'wait') Yêu cầu mượn sách đang chờ
-            @elseif($status === 'reading') Sách đang mượn
-            @elseif($status === 'returned') Sách đã trả
-            @elseif($status === 'overdue') Sách quá hạn
-            @endif
-        </h2>
     </div>
 
     @if(session('success'))
@@ -32,36 +25,42 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($apprs as $ap)
+                @forelse($approvals as $ap)
                 <tr class="bg-white border-b">
-                    <td class="px-6 py-4">{{ $ap->user->name ?? 'Không rõ' }}</td>
-                    <td class="px-6 py-4">{{ $ap->user->email ?? 'Không có email' }}</td>
+                    <td class="px-6 py-4">{{ $ap->user->name }}</td>
+                    <td class="px-6 py-4">{{ $ap->user->email }}</td>
                     <td class="px-6 py-4 max-w-[200px] truncate">{{ $ap->book->title }}</td>
                     <td class="px-6 py-4">
                         <img class="w-[96px] h-[96px] object-contain" src="{{ $ap->book->image }}" alt="">
                     </td>
-                    <td class="px-6 py-4 font-semibold">{{ ucfirst($ap->status) }}</td>
+                    @if($ap->status === 'wait')
+                    <td class="text-green-500 px-6 py-4 font-semibold">Chờ duyệt</td>
+                    @elseif($ap->status === 'reading')
+                    <td class="text-yellow-500 px-6 py-4 font-semibold">Đang được mượn</td>
+                    @elseif($ap->status === 'overdue')
+                    <td class="text-red-500 px-6 py-4 font-semibold">Quá hạn</td>
+                    @endif
                     <td class="px-6 py-4 sticky right-0 bg-white">
                         <div class="flex space-x-2">
-                            @if($status === 'wait')
+                            @if($ap->status === 'wait')
                             {{-- Duyệt --}}
-                            <form action="{{ route('books.borrow.approval', $ap->book) }}" method="POST">
+                            <form action="" method="POST">
                                 @csrf
                                 <button type="submit"
-                                    class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700">
+                                    class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-green-700">
                                     Duyệt
                                 </button>
                             </form>
-                            {{-- Từ chối --}}
-                            <form action="{{ route('books.borrow.cancel', $ap->book) }}" method="POST">
+                            <!-- {{-- Từ chối --}} -->
+                            <!-- <form action="" method="POST">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
                                     Từ chối
                                 </button>
-                            </form>
-                            @elseif($status === 'reading')
+                            </form> -->
+                            @elseif($ap->status === 'reading' || $ap->status === 'overdue' )
                             {{-- Trả sách --}}
-                            <form action="{{ route('books.borrow.return', $ap->book) }}" method="POST">
+                            <form action="" method="POST">
                                 @csrf @method('PUT')
                                 <button type="submit"
                                     class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
@@ -84,7 +83,7 @@
     </div>
 
     <div class="p-5 flex justify-end">
-        {{ $apprs->links('vendor.pagination.custom') }}
+        {{ $approvals->links('vendor.pagination.custom') }}
     </div>
 </div>
 @endsection

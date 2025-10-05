@@ -12,12 +12,11 @@
         </g>
     </svg>
 
-    <!-- KHỐI USER + DROPDOWN (hover) -->
     <div class="relative group text-center">
+        @auth
         <div class="flex items-center space-x-2 cursor-pointer">
-            <span class="text-white text-sm font-bold">Tung Le</span>
+            <span class="text-white text-sm font-bold">{{ $user->name }}</span>
 
-            <!-- AVATAR SVG GIỮ NGUYÊN -->
             <span class="rounded-full bg-[#52c41a] w-8 h-8">
                 <svg class="w-8 h-8 p-2 text-white" fill="currentColor" viewBox="64 64 896 896" aria-hidden="true">
                     <path
@@ -26,6 +25,7 @@
                 </svg>
             </span>
         </div>
+        @endauth
 
         <!-- DROPDOWN -->
         @auth

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +15,6 @@ class RegisteredUserController extends Controller
 
     public function store()
     {
-        // validate
         $attributes = request()->validate([
             'email' => ['required', 'email', 'unique:users,email'],
             'name' => ['required', 'min:4'],
@@ -37,6 +35,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Đăng ký thành công, bạn đã được đăng nhập!');
+        return redirect('/');
     }
 }

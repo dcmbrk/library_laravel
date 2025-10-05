@@ -14,8 +14,9 @@
 
 
             <!-- <a href="/account/books">My books</a> -->
+            @auth
             <a href="{{ route('account.index') }}" class="hover:underline">Sách của tôi</a>
-
+            @endauth
             <div class="relative group">
                 <!-- Link cha -->
                 <a href="#" class="inline-flex items-center">

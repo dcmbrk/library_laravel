@@ -4,7 +4,7 @@
 
     <!-- Nút tạo danh mục -->
     <div class="flex justify-end p-4">
-        <a href="{{ route('categories.create') }}"
+        <a href="{{ route('dashboard.categories.create') }}"
             class="bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition rounded-lg">
             Tạo danh mục
         </a>
@@ -26,10 +26,11 @@
                 </th>
                 <td class="px-6 py-4 text-black">{{ $category->created_at }}</td>
                 <td class="py-4 text-black flex space-x-8 ml-6">
-                    <a href="{{ route('categories.edit', $category->id) }}" class="text-blue-600 hover:underline">
+                    <a href="{{ route('dashboard.categories.edit', $category->id) }}"
+                        class="text-blue-600 hover:underline">
                         Sửa
                     </a>
-                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                    <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-600 hover:underline">Xóa</button>

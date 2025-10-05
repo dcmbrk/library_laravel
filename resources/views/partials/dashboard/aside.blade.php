@@ -33,21 +33,21 @@
                 <!-- Submenu -->
                 <ul class="hidden group-[.open]:block mt-1 text-sm space-y-1">
                     <li>
-                        <a href="{{ route('dashboard.status', 'wait') }}"
-                            class="{{ request()->is('dashboard/wait') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} block px-4 py-3 rounded-lg">
-                            Đang chờ
+                        <a href="{{ route('dashboard.approval.index', 'wait') }}"
+                            class="{{ request()->is('dashboard/approval/wait') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} block px-4 py-3 rounded-lg">
+                            Yêu cầu mượn sách
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard.status', 'reading') }}"
-                            class="{{ request()->is('dashboard/reading') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} block px-4 py-3 rounded-lg">
-                            Đang mượn
+                        <a href="{{ route('dashboard.approval.index', 'reading') }}"
+                            class="{{ request()->is('dashboard/approval/reading') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} block px-4 py-3 rounded-lg">
+                            Sách đang được mượn
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard.overdue') }}"
-                            class="{{ request()->is('dashboard/overdue') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} block px-4 py-3 rounded-lg">
-                            Quá hạn
+                        <a href="{{ route('dashboard.approval.index', 'overdue') }}"
+                            class="{{ request()->is('dashboard/approval/overdue') ? 'bg-[#1677ff] text-white' : 'text-gray-300 hover:text-white' }} block px-4 py-3 rounded-lg">
+                            Sách đã quá hạn trả
                         </a>
                     </li>
                 </ul>

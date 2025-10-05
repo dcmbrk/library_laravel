@@ -13,7 +13,13 @@ class BookDashboard extends Controller
         if(Auth::guest()){
            return redirect()->route('admin.login.index');
         }
+
         $user = Auth::user();
+
+        if($user->role !== 'editor'){
+            return redirect()->back();
+        }
+
         $books = Book::paginate(10);
         return view('dashboard.books.index', compact(['books', 'user']));
     }
@@ -22,7 +28,14 @@ class BookDashboard extends Controller
         if(Auth::guest()){
            return redirect()->route('admin.login.index');
         }
+
+
         $user = Auth::user();
+
+        if($user->role !== 'editor'){
+            return redirect()->back();
+        }
+
         $categories = Category::all();
         return view('dashboard.books.create', compact(['categories', 'user']));
     }
@@ -75,7 +88,12 @@ class BookDashboard extends Controller
             return redirect()->route('login');
         }
 
+
         $user = Auth::user();
+
+        if($user->role !== 'editor'){
+            return redirect()->back();
+        }
 
         $book = Book::findOrFail($id);
         $categories = Category::all();

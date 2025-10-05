@@ -16,6 +16,10 @@ class CategoryDashboard extends Controller
 
         $user = Auth::user();
 
+        if($user->role !== 'editor'){
+            return redirect()->back();
+        }
+
         $categories = Category::paginate(10);
         return view('dashboard.categories.index', compact(['categories', 'user']));
     }
@@ -24,7 +28,14 @@ class CategoryDashboard extends Controller
         if(Auth::guest()){
            return redirect()->route('admin.login.index');
         }
+
+
         $user = Auth::user();
+
+        if($user->role !== 'editor'){
+            return redirect()->back();
+        }
+
         return view('dashboard.categories.create', compact('user'));
     }
 
@@ -47,7 +58,15 @@ class CategoryDashboard extends Controller
         if(Auth::guest()){
            return redirect()->route('admin.login.index');
         }
+
+
         $user = Auth::user();
+
+        if($user->role !== 'editor'){
+            return redirect()->back();
+        }
+
+
         $category = Category::find($id);
         return view('dashboard.categories.edit', compact(['category', 'user']));
     }

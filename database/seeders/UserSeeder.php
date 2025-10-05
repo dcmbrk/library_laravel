@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => $user['password'],
-                'role' => $user['role']
+                'role' => $user['role'],
+                'status' => $user['status']
             ]);
         });
     }

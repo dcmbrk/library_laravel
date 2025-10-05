@@ -4,19 +4,22 @@
     <div class="h-full px-1 py-[6px] overflow-y-auto bg-[#001529]">
         <ul class="space-y-3 font-medium text-sm">
 
-            {{-- Trang chủ --}}
             <x-dashboard.navbar url="dashboard" label="Trang chủ">
                 <path
                     d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204z">
                 </path>
             </x-dashboard.navbar>
 
-            <x-dashboard.navbar url="dashboard/users" label="Người dùng">
+            @if($user->role === 'admin')
+            <x-dashboard.navbar url="/dashboard/users" label="Người dùng">
                 <path
                     d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2z">
                 </path>
             </x-dashboard.navbar>
+            @endif
 
+
+            @if($user->role === 'editor')
             <li class="relative group">
                 <button
                     class="px-4 flex items-center justify-between w-full p-2 text-gray-300 rounded-lg space-x-2 hover:text-white">
@@ -102,7 +105,7 @@
                     </li>
                 </ul>
             </li>
-
+            @endif
         </ul>
     </div>
 </aside>

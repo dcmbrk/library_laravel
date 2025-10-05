@@ -3,30 +3,35 @@
         "name": "testuser",
         "email": "testuser@gmail.com",
         "password": "password",
-        "role": "reader"
+        "role": "reader",
+        "status": "online"
     },
     {
         "name": "adminuser",
         "email": "admin@gmail.com",
         "password": "admin123",
-        "role": "admin"
+        "role": "admin",
+        "status": "online"
     },
     {
         "name": "librarian01",
         "email": "librarian01@gmail.com",
         "password": "libpass",
-        "role": "librarian"
+        "role": "editor",
+        "status": "online"
     },
     {
         "name": "reader02",
         "email": "reader02@gmail.com",
         "password": "readerpass",
-        "role": "reader"
+        "role": "reader",
+        "status": "online"
     },
     {
         "name": "editor01",
         "email": "editor01@gmail.com",
         "password": "editpass",
-        "role": "editor"
+        "role": "editor",
+        "status": "online"
     }
 ]

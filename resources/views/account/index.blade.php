@@ -10,12 +10,7 @@
 </div>
 
 <x-book.list-account status="wait" :books="$wait_books">Sách đang chờ duyệt</x-book.list-account>
-
 <x-book.list-account status="reading" :books="$reading_books">Sách đang đọc</x-book.list-account>
-
-<x-book.list-account status="returned" :books="$already_read_books">Sách đã đọc</x-book.list-account>
-
 <x-book.list-account status="overdue" :books="$overdue_books">Sách quá hạn</x-book.list-account>
-
-
+<x-book.list-account status="returned" :books="$already_read_books">Sách đã đọc</x-book.list-account>
 @endsection

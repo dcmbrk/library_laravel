@@ -19,7 +19,7 @@
                 <span class="hidden group-hover:block text-center text-white">Hủy</span>
             </button>
         </form>
-        @elseif($status === 'reading')
+        @elseif($status === 'reading' || $status === 'overdue')
         <button type="button" class="px-6 py-3 border border-gray-500 text-white bg-black cursor-not-allowed">Đang
             đọc</button>
         @else

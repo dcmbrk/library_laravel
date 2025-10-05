@@ -14,9 +14,10 @@ public function show($slug){
         $book = Book::where('slug', $slug)->with('category')->firstOrFail();
 
         $status = DB::table('book_user')
-            ->where('book_id', $book->id)
-            ->where('user_id', $user?->id)
-            ->value('status') ?? 'none';
+        ->where('book_id', $book->id)
+        ->where('user_id', $user?->id)
+        ->orderByDesc('borrow_date')
+        ->value('status') ?? 'none';
 
 
         $related_books = Book::where('category_id', $book->category_id)->where('id', '!=', $book->id)->take(5)->get();
@@ -38,13 +39,23 @@ public function show($slug){
         return redirect()->route('account.index');
     }
 
-    public function cancel(Book $book){
+   public function cancel(Book $book)
+    {
         $user = Auth::user();
 
-        if ($user->books()->where('book_id', $book->id)->exists()) {
-            $user->books()->detach($book->id);
-            return redirect()->route('account.index');
+        // Lấy bản ghi mượn mới nhất của user cho sách này
+        $pivot = DB::table('book_user')
+            ->where('user_id', $user->id)
+            ->where('book_id', $book->id)
+            ->orderByDesc('id')
+            ->first();
+
+        // Nếu tồn tại thì xóa đúng bản ghi đó
+        if ($pivot) {
+            DB::table('book_user')->where('id', $pivot->id)->delete();
         }
-        return back();
+
+        return redirect()->route('account.index')->with('success', 'Hủy mượn sách thành công!');
     }
+
 }

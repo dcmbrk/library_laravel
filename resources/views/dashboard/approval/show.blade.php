@@ -44,23 +44,21 @@
                         <div class="flex space-x-2">
                             @if($ap->status === 'wait')
                             {{-- Duyệt --}}
-                            <form action="" method="POST">
+                            <form
+                                action="{{ route('dashboard.approval.update', ['status' => 'reading', 'id' => $ap->book_id]) }}"
+                                method="POST">
                                 @csrf
+                                @method('PUT')
                                 <button type="submit"
                                     class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-green-700">
                                     Duyệt
                                 </button>
                             </form>
-                            <!-- {{-- Từ chối --}} -->
-                            <!-- <form action="" method="POST">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
-                                    Từ chối
-                                </button>
-                            </form> -->
                             @elseif($ap->status === 'reading' || $ap->status === 'overdue' )
                             {{-- Trả sách --}}
-                            <form action="" method="POST">
+                            <form
+                                action="{{ route('dashboard.approval.update', ['status' => 'returned', 'id' => $ap->book_id]) }}"
+                                method="POST">
                                 @csrf @method('PUT')
                                 <button type="submit"
                                     class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">

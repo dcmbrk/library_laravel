@@ -10,14 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ApprovalController extends Controller
 {
-    /**
-     * Hiển thị danh sách theo status (wait, reading, returned, rejected)
-     */
     public function show($status)
     {
         if(Auth::guest()){
            return redirect()->route('admin.login.index');
         }
+
+        BookUser::where('status', 'reading')
+        ->whereNotNull('due_date')
+        ->where('due_date', '<=', now())
+        ->update(['status' => 'overdue']);
+
 
         $user = Auth::user();
 
@@ -29,4 +32,35 @@ class ApprovalController extends Controller
 
         return view("dashboard.approval.show", compact(['approvals', 'user']));
     }
+
+    public function update($status, $id)
+    {
+        if (Auth::guest()) {
+            return redirect()->route('admin.login.index');
+        }
+
+        $approval = BookUser::where('book_id', $id)
+        ->when(Auth::user()->role === 'user', fn($q) => $q->where('user_id', Auth::id()))
+        ->orderByDesc('id')
+        ->firstOrFail();
+
+        $approval->update([
+            'status' => $status
+        ]);
+
+        return back();
+    }
+
+
+    // public function destroy($id)
+    // {
+    //     if(Auth::guest()){
+    //        return redirect()->route('admin.login.index');
+    //     }
+
+    //     $approval = BookUser::findOrFail($id);
+    //     $approval->delete();
+
+    //     return back();
+    // }
 }

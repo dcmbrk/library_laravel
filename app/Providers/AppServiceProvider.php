@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
         // BookUser::where('status', 'reading')
         // ->whereDate('due_date', '<', Carbon::today())
         // ->update(['status' => 'overdue']);
+
     }
 }

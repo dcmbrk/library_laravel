@@ -14,7 +14,8 @@
             Schema::create('books', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
-                $table->string('author')->default('ĐANG CẬP NHẬT');
+                // $table->string('author')->default('ĐANG CẬP NHẬT');
+                $table->integer('author_id');
                 $table->string('translator')->default('ĐANG CẬP NHẬT');
                 $table->string('publisher')->default('ĐANG CẬP NHẬT');
                 $table->string('publish_date')->default('ĐANG CẬP NHẬT');

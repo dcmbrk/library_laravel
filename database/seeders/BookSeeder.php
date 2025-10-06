@@ -19,7 +19,7 @@ class BookSeeder extends Seeder
         $books->each(function($book){
             Book::create([
                 'title' => $book['title'],
-                'author' => $book['author'],
+                'author_id' => $book['author_id'],
                 'translator' => $book['translator'],
                 'publisher' => $book['publisher'],
                 'publish_date' => $book['publish_date'],

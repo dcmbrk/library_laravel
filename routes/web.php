@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Author;
+
+Route::get('/author/{slug}', function($slug){
+    $author = Author::where('slug', $slug)->firstOrFail();
+    return view('authors.show', compact('author'));
+})->name('authors.show');
 
 require __DIR__.'/dashboard/index.php';
 require __DIR__.'/dashboard/approval.php';

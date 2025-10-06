@@ -5,8 +5,9 @@
     </div>
     <div>
         <h3 class="uppercase font-bold text-3xl mb-2 w-[500px]">{{ $book->title }}</h3>
-        <p class="mb-4">Tác giả: <a class="uppercase hover:text-blue-700 hover:underline cursor-pointer font-bold">{{
-                $book->author }}</a>
+        <p class="mb-4">Tác giả: <a href="{{ route('authors.show', $book->author->slug) }}"
+                class="uppercase hover:text-blue-700 hover:underline cursor-pointer font-bold">{{
+                $book->author->name }}</a>
         </p>
         <p class=" border-t border-gray-300 py-4">Còn lại {{ $book->available_copies }} bản</p>
         @if($status === 'wait')

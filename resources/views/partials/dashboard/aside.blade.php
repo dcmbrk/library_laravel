@@ -3,7 +3,6 @@
     aria-label="Sidebar">
     <div class="h-full px-1 py-[6px] overflow-y-auto bg-[#001529]">
         <ul class="space-y-3 font-medium text-sm">
-
             <x-dashboard.navbar url="dashboard" label="Trang chủ">
                 <path
                     d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204z">
@@ -70,6 +69,12 @@
                     </li>
                 </ul>
             </li>
+
+            <x-dashboard.navbar url="dashboard/authors" label="Tác giả">
+                <path
+                    d="M938 458.8l-29.6-312.6c-1.5-16.2-14.4-29-30.6-30.6L565.2 86h-.4c-3.2 0-5.7 1-7.6 2.9L88.9 557.2a9.96 9.96 0 000 14.1l363.8 363.8c1.9 1.9 4.4 2.9 7.1 2.9s5.2-1 7.1-2.9l468.3-468.3c2-2.1 3-5 2.8-8z">
+                </path>
+            </x-dashboard.navbar>
 
 
             {{-- Danh mục sách --}}

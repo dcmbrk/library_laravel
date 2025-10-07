@@ -29,6 +29,11 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
         ->names('dashboard.news');
 });
 
+Route::prefix('dashboard')->middleware(['auth'])->group(function () {
+    Route::resource('authors', App\Http\Controllers\AuthorDashboard::class)
+        ->names('dashboard.authors');
+});
+
 
 
 require __DIR__.'/dashboard/index.php';

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
-            $table->text('image');
-            $table->text('bio');
-            $table->text('url');
+            $table->string('slug')->nullable();
+            $table->text('image')->nullable();
+            $table->text('bio')->nullable();
+            $table->text('url')->nullable();
             $table->timestamps();
         });
     }

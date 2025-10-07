@@ -5,7 +5,7 @@
         <p class="text-xl font-bold">{{ $slot }}</p>
         <a class="underline" href="{{ route('category.show', $books->first()->category->slug) }}">Xem thêm</a>
     </div>
-    <div class=" flex justify-between mb-10">
+    <div class=" flex mb-10 space-x-10">
         @foreach($books as $book)
         <x-book.item :book="$book"></x-book.item>
         @endforeach

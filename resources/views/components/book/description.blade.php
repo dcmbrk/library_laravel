@@ -13,7 +13,7 @@
         <ul class="border border-gray-300 px-6 py-5 space-y-2">
             <li class="flex before:content-['•'] before:mr-2">
                 <span class="w-[150px] font-semibold">Tác giả:</span>
-                <span class="uppercase w-[150px] break-words">{{ $book->author }}</span>
+                <span class="uppercase w-[150px] break-words">{{ $book->author->name }}</span>
             </li>
             <li class="flex before:content-['•'] before:mr-2">
                 <span class="w-[150px] font-semibold">Dịch giả:</span>

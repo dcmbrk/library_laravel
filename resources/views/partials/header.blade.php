@@ -1,18 +1,16 @@
 <header>
-    <!-- <div class="h-[40px] bg-gradient-to-r from-brand/95 via-brand/90 to-brand/85 flex items-center justify-center">
-    </div> -->
+    <div class="h-[40px] bg-gradient-to-r from-black/92 via-black/88 to-black/80 items-center justify-center">
+    </div>
 
-    <div class="h-[40px] flex items-center justify-center">
+    <!-- <div class="h-[40px] flex items-center justify-center">
         <img src="https://fastly.picsum.photos/id/310/1440/40.jpg?hmac=CCBv16cxZ7-X0pXw00Ah62sLF3Gq19DYy2qUSUkcuRg"
             alt="">
-    </div>
+    </div> -->
 
     <nav
         class="relative flex items-center justify-between px-6 py-4  text-sm min-w-[1440px] border border-gray-200 tracking-tight">
         <div class="flex space-x-5 cursor-pointer items-center">
             <a href="/" class="hover:underline">Trang chủ</a>
-
-
             <!-- <a href="/account/books">My books</a> -->
             @auth
             <a href="{{ route('account.index') }}" class="hover:underline">Sách của tôi</a>
@@ -109,6 +107,8 @@
                     </div>
                 </div>
             </div>
+            <a href="/authors" class="hover:underline">Tác giả</a>
+            <a href="/news" class="hover:underline">Tin sách</a>
         </div>
         <div class="absolute left-1/2 -translate-x-1/2">
             <a href="/" class="font-serif font-bold text-xl tracking-widest">nhã nam</a>

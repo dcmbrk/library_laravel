@@ -17,7 +17,7 @@ class SessionController extends Controller
     {
         $attributes = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required']
+            'password' => ['required'],
         ], [
             'email.required' => 'Vui lòng nhập email.',
             'email.email' => 'Email không đúng định dạng.',
@@ -30,10 +30,19 @@ class SessionController extends Controller
             ]);
         }
 
-        $request->session()->regenerate();
+        $user = Auth::user();
 
-        return redirect('/');
+        if ($user->status !== 'online') {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'Tài khoản của bạn đã bị khóa.',
+            ]);
+        }
+
+        $request->session()->regenerate();
+        return redirect()->intended('/');
     }
+
 
 
     public function destroy()

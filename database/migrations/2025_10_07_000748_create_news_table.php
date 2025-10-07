@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string(column: 'slug');
             $table->string(column: 'description');
             $table->string('date');
-            $table->text('url');
+            $table->text('url')->nullable();
             $table->text('thumbnail');
             $table->text('content_html');
             $table->timestamps();

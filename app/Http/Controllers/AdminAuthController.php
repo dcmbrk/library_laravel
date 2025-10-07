@@ -30,10 +30,17 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        if (! Auth::user()->role === 'admin') {
+        if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'editor') {
             Auth::logout();
             throw ValidationException::withMessages([
-                'email' => 'Bạn không có quyền truy cập admin.',
+                'email' => 'Bạn không có quyền truy cập.',
+            ]);
+        }
+
+        if (Auth::user()->status !== 'online') {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'Tài khoản đã bị khóa.',
             ]);
         }
 

@@ -6,7 +6,6 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\News;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {

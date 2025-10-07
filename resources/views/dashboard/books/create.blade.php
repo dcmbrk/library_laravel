@@ -33,9 +33,16 @@
         <!-- Author -->
         <div>
             <label class="block mb-1 text-sm font-medium">Tác giả</label>
-            <input type="text" name="author" value="{{ old('author') }}"
-                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200">
+            <select name="author_id" required class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200">
+                <option value="">-- Chọn tác giả --</option>
+                @foreach($authors as $author)
+                <option value="{{ $author->id }}" {{ old('author_id')==$author->id ? 'selected' : '' }}>
+                    {{ $author->name }}
+                </option>
+                @endforeach
+            </select>
         </div>
+
 
         <!-- Translator -->
         <div>

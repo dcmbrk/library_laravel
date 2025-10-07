@@ -36,7 +36,7 @@
                     <td class="px-6 py-4"><img class="w-[128px] h-[128px] object-contain" src="{{ $book->image }}"
                             alt=""></td>
                     <td class="px-6 py-4 max-w-[200px] truncate">{{ $book->title }}</td>
-                    <td class="px-6 py-4 max-w-[200px] truncate">{{ $book->author }}</td>
+                    <td class="px-6 py-4 max-w-[200px] truncate">{{ $book->author->name }}</td>
                     <td class="px-6 py-4 max-w-[200px] truncate">{{ $book->translator }}</td>
                     <td class="px-6 py-4 max-w-[200px] truncate">{{ $book->publisher }}</td>
                     <td class="px-6 py-4 max-w-[200px] truncate">{{ $book->publish_date }}</td>

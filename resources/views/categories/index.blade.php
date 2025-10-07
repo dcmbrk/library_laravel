@@ -85,10 +85,12 @@
     <div class=" flex mb-10 space-x-10 justify-around items-center w-[1300px] mx-auto">
         @foreach($news_list as $n)
         <a href="{{ route('news.show', $n->slug) }}" class="flex-1 space-y-2">
-            <img src="{{ $n->thumbnail }}" alt="" class="w-[410px] h-[230px] object-contain">
-            <p class="font-bold">{{ $n->title }}</p>
-            <p class="text-gray-600 w-[400px] truncate text-sm">{{ $n->description }}</p>
-            <p class="text-gray-700">{{ $n->date }}</p>
+            <img src="{{ $n->thumbnail }}" alt="" class="w-[410px] h-[230px] object-cover">
+            <div class="space-y-2">
+                <p class="font-bold">{{ $n->title }}</p>
+                <p class="text-gray-600 w-[400px] truncate text-sm">{{ $n->description }}</p>
+                <p class="text-gray-700">{{ $n->date }}</p>
+            </div>
         </a>
         @endforeach
     </div>

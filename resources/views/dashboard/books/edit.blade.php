@@ -22,7 +22,7 @@
         <div>
             <label class="block mb-1 text-sm font-medium">Tên sách</label>
             <input type="text" name="title" id="title" value="{{ old('title', $book->title) }}"
-                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200 required">
+                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200" required>
         </div>
 
         <!-- Slug -->
@@ -35,8 +35,15 @@
         <!-- Author -->
         <div>
             <label class="block mb-1 text-sm font-medium">Tác giả</label>
-            <input type="text" name="author" value="{{ old('author', $book->author) }}"
-                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200">
+            <select name="author_id" required class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200">
+                <option value="">-- Chọn tác giả --</option>
+                @foreach($authors as $author)
+                <option value="{{ $author->id }}" {{ old('author_id', $book->author_id) == $author->id ? 'selected' : ''
+                    }}>
+                    {{ $author->name }}
+                </option>
+                @endforeach
+            </select>
         </div>
 
         <!-- Translator -->

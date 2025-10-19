@@ -20,54 +20,67 @@
                 </th>
                 <td class="px-6 py-4 text-black">{{ $u->email }}</td>
                 <td class="px-6 py-4 text-black uppercase">{{ $u->role }}</td>
+
+                {{-- Hiển thị trạng thái --}}
                 @if($u->status === 'online')
                 <td class="px-6 py-4 uppercase text-green-500">{{ $u->status }}</td>
                 @else
                 <td class="px-6 py-4 uppercase text-red-500">{{ $u->status }}</td>
                 @endif
+
                 <td class="px-6 py-4 text-black">{{ $u->created_at }}</td>
-                @if( $u->role !== 'admin')
+
+                {{-- Hành động chỉ cho non-admin --}}
+                @if($u->role !== 'admin')
                 <td class="px-6 py-4 sticky right-0 bg-white">
                     <div class="flex space-x-2 items-center justify-start">
-                        @if( $u->status === 'online' )
-                        <form action="{{ route('dashboard.users.status', ['id' => $u->id, 'status' => 'offline']) }}"
-                            method="POST">
+
+                        {{-- Chuyển trạng thái online/offline --}}
+                        @if($u->status === 'online')
+                        <form action="{{ route('dashboard.users.status') }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $u->id }}">
+                            <input type="hidden" name="status" value="offline">
                             <button type="submit"
                                 class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
                                 Khóa
                             </button>
                         </form>
                         @else
-                        <form action="{{ route('dashboard.users.status', ['id' => $u->id, 'status' => 'online']) }}"
-                            method="POST">
+                        <form action="{{ route('dashboard.users.status') }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $u->id }}">
+                            <input type="hidden" name="status" value="online">
                             <button type="submit"
                                 class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
                                 Mở
                             </button>
                         </form>
                         @endif
-                        @if( $user->role === 'reader')
-                        <form action="{{ route('dashboard.users.role', ['id' => $u->id, 'role' => 'editor']) }}"
-                            method="POST">
+
+                        {{-- Chuyển quyền editor/reader --}}
+                        @if($u->role === 'editor')
+                        <form action="{{ route('dashboard.users.role') }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <button type="submit"
-                                class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
-                                Editor
-                            </button>
-                        </form>
-                        @else
-                        <form action="{{ route('dashboard.users.role', ['id' => $u->id, 'role' => 'reader']) }}"
-                            method="POST">
-                            @csrf
-                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $u->id }}">
+                            <input type="hidden" name="role" value="reader">
                             <button type="submit"
                                 class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
                                 Reader
+                            </button>
+                        </form>
+                        @else
+                        <form action="{{ route('dashboard.users.role') }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $u->id }}">
+                            <input type="hidden" name="role" value="editor">
+                            <button type="submit"
+                                class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
+                                Editor
                             </button>
                         </form>
                         @endif
@@ -78,6 +91,7 @@
             @endforeach
         </tbody>
     </table>
+
     <div class="p-10 place-items-end">
         {{ $users->links('vendor.pagination.custom') }}
     </div>

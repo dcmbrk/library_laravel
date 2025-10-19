@@ -13,8 +13,7 @@
     </div>
     @endif
 
-    <form action="{{ route('dashboard.books.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4"
-        onsubmit="alert('Form submit');">
+    <form action="{{ route('dashboard.books.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
         <!-- Title -->
         <div>

@@ -9,7 +9,7 @@
     {
         "name": "adminuser",
         "email": "admin@gmail.com",
-        "password": "admin123",
+        "password": "   ",
         "role": "admin",
         "status": "online"
     },

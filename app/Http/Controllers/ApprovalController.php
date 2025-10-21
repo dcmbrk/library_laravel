@@ -50,6 +50,13 @@ class ApprovalController extends Controller
             'status' => $status
         ]);
 
-        return back();
+        if ($status === 'returned') {
+            $book = Book::find($id);
+            if ($book) {
+                $book->increment('available_copies', 1);
+            }
+    }
+
+    return back();
     }
 }

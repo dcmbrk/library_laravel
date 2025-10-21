@@ -11,11 +11,9 @@ class NewsController extends Controller
         return view('news.index', compact(['news']));
     }
 
-    public function show($slug)
-{
+    public function show($slug){
     $news = News::where('slug', $slug)->firstOrFail();
 
     return view('news.show', compact('news'));
-}
-
+    }
 }

@@ -23,6 +23,9 @@
         @elseif($status === 'reading' || $status === 'overdue')
         <button type="button" class="px-6 py-3 border border-gray-500 text-white bg-black cursor-not-allowed">Đang
             đọc</button>
+        @elseif( $book->available_copies === 0)
+        <button type="button" class="px-6 py-3 border border-gray-500 text-white bg-black cursor-not-allowed">Tạm
+            hết</button>
         @else
         <form action="{{ route('books.borrow', $book->id) }}" method="POST">
             @csrf

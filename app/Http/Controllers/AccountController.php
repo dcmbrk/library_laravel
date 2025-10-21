@@ -37,7 +37,12 @@ class AccountController extends Controller
             ->take(5)
             ->get();
 
-        return view('account.index', compact('wait_books', 'reading_books', 'already_read_books', 'overdue_books', 'user'));
+        return view('account.index', compact([
+            'wait_books',
+            'reading_books',
+            'already_read_books',
+            'overdue_books', 'user'
+        ]));
     }
 
 

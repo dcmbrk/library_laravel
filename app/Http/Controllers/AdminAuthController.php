@@ -24,21 +24,23 @@ class AdminAuthController extends Controller
             'password.required' => 'Vui lòng nhập mật khẩu.',
         ]);
 
-        if (!Auth::attempt($attributes)) {
+        if (!Auth::guard('admin')->attempt($attributes)) {
             throw ValidationException::withMessages([
                 'email' => 'Email hoặc mật khẩu không chính xác.',
             ]);
         }
 
-        if (Auth::user()->role !== 'admin' && Auth::user()->role !== 'editor') {
-            Auth::logout();
+        $user = Auth::guard('admin')->user();
+
+        if (!in_array($user->role, ['admin', 'editor'])) {
+            Auth::guard('admin')->logout();
             throw ValidationException::withMessages([
                 'email' => 'Bạn không có quyền truy cập.',
             ]);
         }
 
-        if (Auth::user()->status !== 'online') {
-            Auth::logout();
+        if ($user->status !== 'online') {
+            Auth::guard('admin')->logout();
             throw ValidationException::withMessages([
                 'email' => 'Tài khoản đã bị khóa.',
             ]);
@@ -51,7 +53,10 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
+
+        $request->session()->regenerateToken();
+
         return redirect()->route('admin.login.index');
     }
 }

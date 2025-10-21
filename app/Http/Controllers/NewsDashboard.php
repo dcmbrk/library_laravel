@@ -12,11 +12,11 @@ class NewsDashboard extends Controller
 {
     public function index()
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'admin') {
             return redirect()->back();
@@ -28,11 +28,11 @@ class NewsDashboard extends Controller
 
     public function create()
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'admin') {
             return redirect()->back();
@@ -43,11 +43,11 @@ class NewsDashboard extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'admin') {
             return redirect()->back();
@@ -57,13 +57,12 @@ class NewsDashboard extends Controller
             'title'         => 'required|string|max:255',
             'slug'          => 'required|string|unique:news,slug',
             'description'   => 'nullable|string|max:1000',
-            'date'          => 'nullable|string|max:255', // ✅ đổi từ "date" sang "string"
+            'date'          => 'nullable|string|max:255',
             'url'           => 'nullable|url|max:255',
             'thumbnail'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'content_html'  => 'required|string',
         ]);
 
-        // upload thumbnail
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('news', 'public');
             $validated['thumbnail'] = Storage::url($path);
@@ -76,11 +75,11 @@ class NewsDashboard extends Controller
 
     public function edit($id)
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'admin') {
             return redirect()->back();
@@ -92,11 +91,11 @@ class NewsDashboard extends Controller
 
     public function update(Request $request, $id)
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'admin') {
             return redirect()->back();
@@ -106,13 +105,12 @@ class NewsDashboard extends Controller
             'title'         => 'required|string|max:255',
             'slug'          => 'required|string|unique:news,slug,' . $id,
             'description'   => 'nullable|string|max:1000',
-            'date'          => 'nullable|string|max:255', // ✅ đổi từ "date" sang "string"
+            'date'          => 'nullable|string|max:255',
             'url'           => 'nullable|url|max:255',
             'thumbnail'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'content_html'  => 'required|string',
         ]);
 
-        // upload mới nếu có
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('news', 'public');
             $validated['thumbnail'] = Storage::url($path);
@@ -126,11 +124,11 @@ class NewsDashboard extends Controller
 
     public function destroy($id)
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'admin') {
             return redirect()->back();

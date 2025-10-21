@@ -3,8 +3,7 @@
 use App\Http\Controllers\ApprovalController;
 use Illuminate\Support\Facades\Route;
 
-Route::put('/dashboard/approval/{status}/{id}', [ApprovalController::class, 'update'])
-    ->name('dashboard.approval.update');
-
-Route::get('/dashboard/approval/{status}', [ApprovalController::class, 'show'])
-    ->name('dashboard.approval.index');
+Route::prefix('dashboard/approval')->name('dashboard.approval.')->group(function () {
+    Route::get('/{status}', [ApprovalController::class, 'show'])->name('index');
+    Route::put('/{status}/{id}', [ApprovalController::class, 'update'])->name('update');
+});

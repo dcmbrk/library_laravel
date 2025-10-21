@@ -13,6 +13,7 @@
     </svg>
 
     <div class="relative group text-center">
+        @auth('admin')
         @if(isset($user))
         <div class="flex items-center space-x-2 cursor-pointer">
             <span class="text-white text-sm font-bold">{{ $user->name }}</span>
@@ -20,17 +21,13 @@
                 <!-- SVG avatar -->
             </span>
         </div>
-        @else
-        <div class="text-white text-sm italic"></div>
         @endif
-
+        @endauth
 
         <!-- DROPDOWN -->
-        @auth
         <a href="{{ route('admin.logout')}}"
             class=" hidden group-hover:block absolute right-0 w-40 border bg-white shadow-lg z-50 py-2">
             Đăng xuất
         </a>
-        @endauth
     </div>
 </header>

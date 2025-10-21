@@ -2,21 +2,14 @@
     <div class="h-[40px] bg-gradient-to-r from-black/92 via-black/88 to-black/80 items-center justify-center">
     </div>
 
-    <!-- <div class="h-[40px] flex items-center justify-center">
-        <img src="https://fastly.picsum.photos/id/310/1440/40.jpg?hmac=CCBv16cxZ7-X0pXw00Ah62sLF3Gq19DYy2qUSUkcuRg"
-            alt="">
-    </div> -->
-
     <nav
         class="relative flex items-center justify-between px-6 py-4  text-sm min-w-[1440px] border border-gray-200 tracking-tight">
         <div class="flex space-x-5 cursor-pointer items-center">
             <a href="/" class="hover:underline">Trang chủ</a>
-            <!-- <a href="/account/books">My books</a> -->
             @auth
             <a href="{{ route('account.index') }}" class="hover:underline">Sách của tôi</a>
             @endauth
             <div class="relative group">
-                <!-- Link cha -->
                 <a href="#" class="inline-flex items-center">
                     Danh sách
                     <i class="fa fa-angle-down"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"

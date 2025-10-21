@@ -10,13 +10,13 @@ class UserDashboard extends Controller
 {
     public function index()
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
-        if($user->role !== 'admin'){
+        if ($user->role !== 'admin') {
             return redirect()->back();
         }
 
@@ -26,39 +26,62 @@ class UserDashboard extends Controller
 
     public function statusSwitch(Request $request)
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
-        if($user->role !== 'admin'){
+        $user = Auth::guard('admin')->user();
+
+        if ($user->role !== 'admin') {
             return redirect()->back();
         }
 
-        $user = User::findOrFail($request->input('id'));
-        $user->update([
+        $targetUser = User::findOrFail($request->input('id'));
+        $targetUser->update([
             'status' => $request->input('status'),
         ]);
 
-        return redirect()->back();
+        return redirect()->route('dashboard.users.index')
+                         ->with('success', 'Cập nhật trạng thái người dùng thành công!');
     }
 
     public function roleSwitch(Request $request)
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
-        if($user->role !== 'admin'){
+        $user = Auth::guard('admin')->user();
+
+        if ($user->role !== 'admin') {
             return redirect()->back();
         }
 
-        $user = User::findOrFail($request->input('id'));
-        $user->update([
+        $targetUser = User::findOrFail($request->input('id'));
+        $targetUser->update([
             'role' => $request->input('role'),
         ]);
 
-        return redirect()->back();
+        return redirect()->route('dashboard.users.index')
+                         ->with('success', 'Cập nhật vai trò người dùng thành công!');
+    }
+
+    public function destroy($id)
+    {
+        if (Auth::guard('admin')->guest()) {
+            return redirect()->route('admin.login.index');
+        }
+
+        $user = Auth::guard('admin')->user();
+
+        if ($user->role !== 'admin') {
+            return redirect()->back();
+        }
+
+        $targetUser = User::findOrFail($id);
+        $targetUser->delete();
+
+        return redirect()->route('dashboard.users.index')
+                         ->with('success', 'Xóa người dùng thành công!');
     }
 }

@@ -13,11 +13,11 @@ class BookDashboard extends Controller
 {
     public function index()
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'editor') {
             return redirect()->back();
@@ -29,11 +29,11 @@ class BookDashboard extends Controller
 
     public function create()
     {
-        if (Auth::guest()) {
+        if (Auth::guard('admin')->guest()) {
             return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'editor') {
             return redirect()->back();
@@ -52,7 +52,7 @@ class BookDashboard extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         $validated = $request->validate([
             'title'            => 'required|string|max:255',
@@ -89,11 +89,11 @@ class BookDashboard extends Controller
 
     public function edit($id)
     {
-        if (Auth::guest()) {
-            return redirect()->route('login');
+        if (Auth::guard('admin')->guest()) {
+            return redirect()->route('admin.login.index');
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         if ($user->role !== 'editor') {
             return redirect()->back();

@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\CategoryDashboard;
 use Illuminate\Support\Facades\Route;
 

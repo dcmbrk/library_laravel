@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MailController;
+Route::get('/send-mail', [MailController::class, 'sendMail']);
+
 require __DIR__.'/dashboard/index.php';
 require __DIR__.'/dashboard/auth.php';
 require __DIR__.'/dashboard/approval.php';

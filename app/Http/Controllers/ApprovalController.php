@@ -17,35 +17,8 @@ class ApprovalController extends Controller
             return redirect()->route('admin.login.index');
         }
 
-        // 1️⃣ Lấy các sách bị quá hạn
-        $overdueBooks = BookUser::with(['user', 'book'])
-            ->where('status', 'reading')
-            ->whereNotNull('due_date')
-            ->where('due_date', '<=', now())
-            ->get();
+        $this->gmail_approval();
 
-        // 2️⃣ Gom theo user để gửi 1 mail duy nhất mỗi người
-        $grouped = [];
-        foreach ($overdueBooks as $record) {
-            $email = $record->user->email ?? null;
-            if ($email) {
-                $grouped[$email][] = $record->book->title ?? 'Sách không rõ tên';
-            }
-        }
-
-        // 3️⃣ Gửi mail cho từng user
-        $mailer = new MailController();
-        foreach ($grouped as $email => $books) {
-            $mailer->sendMail($email, $books);
-        }
-
-        // 4️⃣ Cập nhật trạng thái sau khi gửi mail
-        foreach ($overdueBooks as $record) {
-            $record->status = 'overdue';
-            $record->save();
-        }
-
-        // 5️⃣ Hiển thị danh sách
         $user = Auth::guard('admin')->user();
 
         $approvals = BookUser::with(['book.category'])
@@ -82,5 +55,31 @@ class ApprovalController extends Controller
     }
 
     return back();
+    }
+
+    public function gmail_approval(){
+                $overdueBooks = BookUser::with(['user', 'book'])
+            ->where('status', 'reading')
+            ->whereNotNull('due_date')
+            ->where('due_date', '<=', now())
+            ->get();
+
+        $grouped = [];
+        foreach ($overdueBooks as $record) {
+            $email = $record->user->email ?? null;
+            if ($email) {
+                $grouped[$email][] = $record->book->title ?? 'Sách không rõ tên';
+            }
+        }
+
+        $mailer = new MailController();
+        foreach ($grouped as $email => $books) {
+            $mailer->sendMail($email, $books);
+        }
+
+        foreach ($overdueBooks as $record) {
+            $record->status = 'overdue';
+            $record->save();
+        }
     }
 }
